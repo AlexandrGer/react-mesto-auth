@@ -111,12 +111,12 @@ function App() {
 		})
 	}
 
-	const handleOnSignOut = () => {
+	const handleOnSignOut = React.useCallback(() => {
 		localStorage.removeItem("jwt");
 		setIsLoggedIn(false);
 		setEmail("");
 		navigate('/sign-in');
-	};
+	}, [navigate]);
 
 	function handleRegister(data) {
 		auth.register(data).then(() => {
@@ -142,24 +142,22 @@ function App() {
 		})
 	}
 
-	const handleTokenCheck = () => {
-		const jwt = localStorage.getItem("jwt");
-		if (jwt) {
-			auth.checkToken(jwt).then((data) => {
-				setEmail(data.data.email);
-				setIsLoggedIn(true)
-			})
-				.catch((err) => {
-					handleOnSignOut();
-					console.log(err.status);
-				});
-		}
-	};
-
 	React.useEffect(() => {
+		function handleTokenCheck() {
+			const jwt = localStorage.getItem("jwt");
+			if (jwt) {
+				auth.checkToken(jwt).then((data) => {
+					setEmail(data.data.email);
+					setIsLoggedIn(true)
+				})
+					.catch((err) => {
+						handleOnSignOut();
+						console.log(err.status);
+					});
+			}
+		}
 		handleTokenCheck();
-	});
-
+	}, [handleOnSignOut])
 
 	React.useEffect(() => {
 		api.getUserData().then((data) => {
@@ -178,7 +176,8 @@ function App() {
 					<Header
 						loggedIn={isLoggedIn}
 						email={email}
-						onSignOut={handleOnSignOut} />
+						onSignOut={handleOnSignOut}
+					/>
 
 					<Routes>
 						<Route path='/sign-up' element={<Register onRegister={handleRegister} />} />
