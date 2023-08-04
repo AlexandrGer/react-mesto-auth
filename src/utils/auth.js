@@ -20,7 +20,6 @@ class Auth {
 	}
 
 	register(data) {
-		console.log(data)
 		return fetch(`${this._url}/signup`, {
 			method: 'POST',
 			headers: this._headers,
@@ -32,7 +31,6 @@ class Auth {
 	}
 
 	authorize(data) {
-		console.log(data)
 		return fetch(`${this._url}/signin`, {
 			method: 'POST',
 			headers: this._headers,

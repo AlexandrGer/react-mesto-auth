@@ -3,12 +3,6 @@ import { Link } from "react-router-dom";
 
 export const Register = ({ onRegister }) => {
 
-	// const onSubmit = (data) => {
-	// 	console.log(data)
-	// 	debugger
-	// 	onRegister(data.email, data.password);
-	// };
-
 	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
 

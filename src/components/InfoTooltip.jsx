@@ -3,7 +3,6 @@ import verificationOn from '../images/verification_on.svg';
 import verificationOff from '../images/verification_off.svg';
 
 export const InfoTooltip = ({ isOpen, onClose, result }) => {
-	console.log(result);
 
 	const handleCLose = () => {
 		onClose(true)

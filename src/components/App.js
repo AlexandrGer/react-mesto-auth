@@ -111,12 +111,12 @@ function App() {
 		})
 	}
 
-	const handleOnSignOut = React.useCallback(() => {
+	const handleOnSignOut = () => {
 		localStorage.removeItem("jwt");
 		setIsLoggedIn(false);
 		setEmail("");
 		navigate('/sign-in');
-	}, [navigate])
+	};
 
 	function handleRegister(data) {
 		auth.register(data).then(() => {
@@ -142,7 +142,7 @@ function App() {
 		})
 	}
 
-	const handleTokenCheck = React.useCallback(() => {
+	const handleTokenCheck = () => {
 		const jwt = localStorage.getItem("jwt");
 		if (jwt) {
 			auth.checkToken(jwt).then((data) => {
@@ -154,11 +154,11 @@ function App() {
 					console.log(err.status);
 				});
 		}
-	}, [handleOnSignOut]);
+	};
 
 	React.useEffect(() => {
 		handleTokenCheck();
-	}, [handleTokenCheck]);
+	});
 
 
 	React.useEffect(() => {
