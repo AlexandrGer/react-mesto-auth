@@ -30,13 +30,13 @@ class Auth {
 		}).then(this._handleResponse)
 	}
 
-	authorize(data) {
+	authorize(password, email) {
 		return fetch(`${this._url}/signin`, {
 			method: 'POST',
 			headers: this._headers,
 			body: JSON.stringify({
-				password: data.password,
-				email: data.email
+				password,
+				email
 			})
 		}).then(this._handleResponse);
 	}

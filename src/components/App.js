@@ -130,14 +130,13 @@ function App() {
 		})
 	}
 
-	function handleLogin(data) {
-		auth.authorize(data).then((data) => {
+	function handleLogin(password, email) {
+		auth.authorize(password, email).then((data) => {
 			localStorage.setItem("jwt", data.token);
 			setIsLoggedIn(true);
 			setEmail(email);
 			navigate('/')
 		}).catch((err) => {
-			setIsInfoTooltipPopupOpen(true);
 			console.log(err);
 		})
 	}
@@ -148,16 +147,15 @@ function App() {
 			if (jwt) {
 				auth.checkToken(jwt).then((data) => {
 					setEmail(data.data.email);
-					setIsLoggedIn(true)
+					setIsLoggedIn(true);
 				})
 					.catch((err) => {
-						handleOnSignOut();
 						console.log(err.status);
 					});
 			}
 		}
 		handleTokenCheck();
-	}, [handleOnSignOut])
+	}, [])
 
 	React.useEffect(() => {
 		api.getUserData().then((data) => {

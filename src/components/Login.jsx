@@ -14,10 +14,7 @@ export const Login = ({ onLogin }) => {
 	}
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		onLogin({
-			password: password,
-			email: email
-		})
+		onLogin(password, email);
 	}
 
 	return (
